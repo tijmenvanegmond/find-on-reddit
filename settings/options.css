@@ -1,0 +1,8 @@
+html, body {
+    font-family:  BentonSans, sans-serif;
+    font-size: 1em;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}

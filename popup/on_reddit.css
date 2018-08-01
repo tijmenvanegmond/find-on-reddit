@@ -1,0 +1,70 @@
+html, body {
+    background-color: #323234;
+    color: #efefef;
+    font-family:  BentonSans, sans-serif;
+}
+
+td {
+    white-space: nowrap;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover{
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+.hidden{
+    display: none;
+}
+
+.post > .score{
+    margin: auto .5em ;
+    padding: .5em;
+    text-align: right;
+    font-weight: 600;
+}
+
+.post > .info {
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+}
+
+.post > .info > *{
+    margin-top: .1em;
+    font-weight: 400;
+    font-size: .8em;
+}
+
+.title{
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.subreddit{
+    font-weight: 600;
+    font-size: .9em;
+}
+
+.loader {
+    border: 4px solid white;
+    border-top: 4px solid #990000; /* Blue */
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin .5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+

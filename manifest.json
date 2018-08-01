@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "Find On Reddit",
+  "version": "0.4",
+  "description": "Generates a pop-up with a list of Reddit posts with the current url. Note: That does mean it sends the url of every website you visit to Reddit. But you can change that behaviour in the settings.",
+  "homepage_url":  "https://addons.mozilla.org/nl/firefox/user/DomKop",
+  "icons": {
+    "48": "icons/svg.svg"
+  },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://api.reddit.com/*",
+    "https://www.reddit.com/*/",
+    "storage"
+  ],
+
+  "background": {
+    "scripts": ["scripts/background-script.js"]
+  },
+
+  "browser_action": {
+    "default_icon": "icons/svg.svg",
+    "default_title": "Find On Reddit",
+    "default_popup": "popup/on_reddit.html"
+  },
+
+   "options_ui": {
+    "page": "settings/options.html"
+  }
+}
