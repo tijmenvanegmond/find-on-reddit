@@ -2,6 +2,7 @@ chrome.tabs.onUpdated.addListener(OnTabChange);
 chrome.tabs.onActivated.addListener(OnTabChange);
 
 function OnTabChange() {
+    Badge.Reset();
     var query = {active: true, currentWindow: true};
     chrome.tabs.query(query, GotTab);
 }
@@ -13,21 +14,19 @@ function GotTab(tabInfo) {
 
 function CheckCache(tabURL)
 {
-    if(!IsCached(tabURL))    
+    if(!Cache.Has(tabURL))    
         AutoLoadIfAllowed(tabURL)
+    else{
+        let amountOfPosts = Cache.Get(tabURL).data.length;
+        Badge.Set({text:amountOfPosts});
+    }
 }
 
 function AutoLoadIfAllowed(tabURL)
 {
+    //TODO:whitelist implementation
     if(SettingsData.AutoloadON)
         RetrieveDataAboutUrl(tabURL);
     else
         console.log("not allowed to autoload")
-}
-
-function ResetBadge()
-{    
-    chrome.browserAction.setBadgeText(
-        {text: ""}
-    );
 }

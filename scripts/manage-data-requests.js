@@ -1,17 +1,17 @@
 chrome.runtime.onMessage.addListener(function (request) {
     if (request.cmd === "gibData") {
         var query = {active: true, currentWindow: true};
-        chrome.tabs.query(query, GotTabManageRequests);
+        chrome.tabs.query(query, ManageRequestsGotTab);
     }
 });
 
-function GotTabManageRequests(tabInfo) {
+function ManageRequestsGotTab(tabInfo) {
     tabURL = new URL(tabInfo[0].url);
     var data;
 
-    if(IsCached(tabURL))
+    if(Cache.Has(tabURL))
     {
-        SendData(GetFromCache(tabURL));
+        SendData(Cache.Get(tabURL));
     }
     else
     {
@@ -21,7 +21,6 @@ function GotTabManageRequests(tabInfo) {
 
 function SendData(redditData)
 {
-    console.log(redditData);
     redditData = JSON.stringify(redditData);
     chrome.runtime.sendMessage({cmd:"sendData",data:redditData});
 }

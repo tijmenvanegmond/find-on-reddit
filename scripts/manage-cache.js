@@ -1,32 +1,34 @@
-var cache = [];
+var Cache = { 
+    data : [],
+    Set: function (data)
+    {
+        for (let i = 0; i < this.data.length; i++) {
+            if(this.data[i].url == data.url){
+                this.data[i] = data;
+                return;
+            } 
+        }
+        this.data.push(data);    
+    },
 
-function ToCache(data)
-{
-    for (let i = 0; i < cache.length; i++) {
-        if(cache[i].url == data.url){
-            cache[i] = data;
-            return;
-        } 
-    }
-    cache.push(data);    
-}
+    Has : function(url)
+    {
+        url = url.toString();
+        for (let i = 0; i < this.data.length; i++) {
+            if(this.data[i].url == url)
+                return true;
+        }
+        return false;
+    },
 
-function IsCached(url)
-{
-    url = url.toString();
-    for (let i = 0; i < cache.length; i++) {
-        if(cache[i].url == url)
-            return true;
+    Get : function(url)
+    {
+        url = url.toString();
+        for (let i = 0; i < this.data.length; i++) {
+            if(this.data[i].url == url)
+                return this.data[i];   
+        }
+        return undefined;
     }
-    return false;
-}
 
-function GetFromCache(url)
-{
-    url = url.toString();
-    for (let i = 0; i < cache.length; i++) {
-        if(cache[i].url == url)
-            return cache[i];   
-    }
-    return undefined;
 }

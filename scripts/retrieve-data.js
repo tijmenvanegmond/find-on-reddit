@@ -58,5 +58,6 @@ function SaveData(response, sendThrough)
         data: posts
     }
 
-    ToCache(newData);
+    Cache.Set(newData);
+    Badge.Set({text:newData.data.length});
 }
