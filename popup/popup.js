@@ -29,7 +29,8 @@ function AddPost(post) {
     let newPost = templates.row;
     for(var prop in post)
     {
-        newPost = newPost.replace(`{{${prop}}}`, post[prop]);
+        let reg = new RegExp(`{{${prop}}}`,"gi");
+        newPost = newPost.replace(reg, post[prop]);
     }
     var body = document.getElementById("popup-content");
     body.innerHTML += newPost;
