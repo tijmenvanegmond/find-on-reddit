@@ -16,6 +16,8 @@ chrome.runtime.onMessage.addListener(function (answer) {
 
 function RenderResults(response) {
     var json = JSON.parse(response);
+    var navbar = document.getElementById("navbar");
+    navbar.innerText = json.api_call_url;
     var content = document.getElementById("popup-content");
     content.innerHTML = "";
     if (json.data.length < 1) {
@@ -26,6 +28,7 @@ function RenderResults(response) {
 }
 
 function AddPost(post) {
+    
     let newPost = templates.row;
     for(var prop in post)
     {

@@ -22,6 +22,12 @@ a:hover{
     display: none;
 }
 
+#navbar{
+    padding: .3rem .1rem 0 .1rem;
+    color: rgb(100 ,100 ,100 );
+    font-size: .75rem;
+}
+
 #popup-content{
     display: grid;
     grid-template-columns: auto 1fr;
@@ -57,6 +63,11 @@ a:hover{
     border-radius: 0 .2rem .2rem 0;
 }
 
+/* .info:hover{
+    background-color: rgb(70, 70, 70) !important;
+    cursor: pointer;
+ } */
+
 .info > *{
     margin-top: .1em;
     font-weight: 400;
@@ -64,8 +75,8 @@ a:hover{
 }
 
 .info > .title{
-    font-weight: 500;
-    font-size: 1.1rem;
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 .subreddit{

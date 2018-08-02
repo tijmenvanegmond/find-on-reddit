@@ -1,3 +1,4 @@
+const FALLBACK_LIMIT = 10;
 function saveOptions(e)
 {
     if(e){ e.preventDefault(); }
@@ -6,14 +7,19 @@ function saveOptions(e)
     var whitelist = document.getElementById('whitelist').value;
     var loadlimit = document.getElementById('loadlimit').value;
     loadlimit = Number(loadlimit);
-    loadlimit = Number.isNaN(loadlimit)? 15 : loadlimit;
+    loadlimit = Number.isNaN(loadlimit)? FALLBACK_LIMIT : loadlimit;
     
     chrome.storage.local.set({
         autoload: autoload,
-        whitelist : whitelist,
-        loadlimit:loadlimit
-    });
+        whitelist: whitelist,
+        loadlimit: loadlimit
+    },tellToUpdate);
 
+    
+}
+
+function tellToUpdate()
+{
     chrome.runtime.sendMessage({cmd:"updateSettings"});
 }
 

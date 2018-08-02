@@ -4,10 +4,10 @@ chrome.tabs.onActivated.addListener(OnTabChange);
 function OnTabChange() {
     Badge.Reset();
     var query = {active: true, currentWindow: true};
-    chrome.tabs.query(query, GotTab);
+    chrome.tabs.query(query, GotTabInfo);
 }
 
-function GotTab(tabInfo) {
+function GotTabInfo(tabInfo) {
     tabURL = new URL(tabInfo[0].url);
     CheckCache(tabURL)   
 }
@@ -34,6 +34,8 @@ function AutoLoadIfAllowed(tabURL)
 
 function DomainInWhitelist(tabURL)
 {
-    var domain = tabURL.host;
-    return SettingsData.whitelist.includes(domain);
+    var domain = tabURL.host.replace('www.','');
+    if(domain) //only if theres a domain
+        return SettingsData.whitelist.includes(domain);
+    return false;    
 }
