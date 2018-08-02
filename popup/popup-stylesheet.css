@@ -22,6 +22,11 @@ a:hover{
     display: none;
 }
 
+.post{
+    margin: 2px;
+    background-color: #3f3f3f;
+}
+
 .post > .score{
     margin: auto .5em ;
     padding: .5em;
@@ -41,9 +46,9 @@ a:hover{
     font-size: .8em;
 }
 
-.title{
+.post > .info > .title{
     font-weight: 500;
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
 .subreddit{

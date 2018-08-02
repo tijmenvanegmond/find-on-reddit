@@ -4,7 +4,7 @@ const REDDIT_URL_FORWARD = "https://www.reddit.com/";
 function RetrieveDataAboutUrl(url, promise)
 {    
     var searchTerms = DeconstructURLForSearchTerms(url);
-    let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=10&sort=top`;
+    let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=${SettingsData.loadlimit}&sort=top`;
     console.log("FIND-ON-REDDIT: retrieving data from: "+redditSearchURL);
     var sendThrough = {originalUrl: url.toString() , promise:promise};
     HttpGetAsync(redditSearchURL, SaveData, sendThrough);
@@ -47,6 +47,7 @@ function SaveData(response, sendThrough)
                 author_name:  post.data.author,
                 author_link: REDDIT_URL_FORWARD +"u/" +post.data.author,
                 timestamp:  post.data.created_utc,
+                time_ago: ToNiceTime(post.data.created_utc),
                 num_comments:   post.data.num_comments
             }
         );

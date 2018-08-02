@@ -9,7 +9,6 @@
   },
 
   "permissions": [
-    "activeTab",
     "tabs",
     "https://api.reddit.com/*",
     "https://www.reddit.com/*/",
@@ -17,9 +16,10 @@
   ],
 
   "background": {
-    "scripts": ["scripts/manage-options.js",
-                "scripts/manage-autoload.js",
+    "scripts": ["scripts/time.js",
                 "scripts/manage-cache.js",
+                "scripts/manage-options.js",
+                "scripts/manage-autoload.js",
                 "scripts/retrieve-data.js",
                 "scripts/manage-badge.js",
                 "scripts/manage-data-requests.js"]
@@ -30,7 +30,6 @@
     "default_title": "Find On Reddit",
     "default_popup": "popup/index.html"
   },
-
    "options_ui": {
     "page": "settings/index.html"
   }

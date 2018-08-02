@@ -4,10 +4,14 @@ function saveOptions(e)
 
     var autoload = document.getElementById('autoload').checked;    
     var whitelist = document.getElementById('whitelist').value;
-
+    var loadlimit = document.getElementById('loadlimit').value;
+    loadlimit = Number(loadlimit);
+    loadlimit = Number.isNaN(loadlimit)? 15 : loadlimit;
+    
     chrome.storage.local.set({
         autoloadON: autoload,
-        whitelist : whitelist
+        whitelist : whitelist,
+        loadlimit:loadlimit
     });
 
     chrome.runtime.sendMessage({cmd:"updateSettings"});
@@ -16,6 +20,7 @@ function saveOptions(e)
 function onGotOptions(item) {
     document.getElementById('autoload').checked = item.autoload;
     document.getElementById('whitelist').value = item.whitelist;
+    document.getElementById('loadlimit').value = item.loadlimit;
 } 
 
 function onError(error) {

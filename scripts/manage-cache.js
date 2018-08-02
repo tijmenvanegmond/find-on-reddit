@@ -29,6 +29,11 @@ var Cache = {
                 return this.data[i];   
         }
         return undefined;
+    },
+
+    Empty : function()
+    {
+        this.data = [];
     }
 
 }

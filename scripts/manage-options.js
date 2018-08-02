@@ -1,6 +1,7 @@
 const DEFAULT_OPTIONS ={
     autoload: true,
-    whitelist: "www.youtube.com www.youtu.be"
+    whitelist: "www.youtube.com www.youtu.be",
+    loadlimit: 15
 };
 var SettingsData = {}
 
@@ -30,6 +31,7 @@ function SetDefaults(data)
 function UpdateSettings(){
     var getting = browser.storage.local.get();
     getting.then(SetSettings);
+    Cache.Empty();
     console.log("FIND-ON-REDDIT: updated settings");
 }
 

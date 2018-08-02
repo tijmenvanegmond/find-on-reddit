@@ -35,6 +35,5 @@ function AutoLoadIfAllowed(tabURL)
 function DomainInWhitelist(tabURL)
 {
     var domain = tabURL.host;
-    console.log("domain:"+domain);
     return SettingsData.whitelist.includes(domain);
 }

@@ -6,10 +6,17 @@
 	</head>
 	<body>
 		<form>
-			<label><input type="checkbox" id="autoload" checked/>Allow Autoload</label>
-			<label>Autoload whitelist:</label>
-			<textarea id="whitelist" placeholder="Enter domains separated by spaces."/></textarea>			
-			<button type="submit">Save</button>
+			<label>Allow Autoload</label>
+			<label  class="container form-input">
+				<input type="checkbox" id="autoload" checked/>
+				<span class="checkmark"></span>
+			</label>
+			
+			<label>Define max posts to load</label>
+			<input id="loadlimit" class="form-input" type="number" value="10"/>
+			<label>Autoload whitelist</label>
+			<textarea id="whitelist" class="form-input" value="www.youtube.com www.youtu.be" placeholder="Enter domains separated by spaces."/></textarea>		
+			<button class="form-input" type="submit">Save</button>
 		</form>
 		<script src="options.js"></script>
 	</body>
