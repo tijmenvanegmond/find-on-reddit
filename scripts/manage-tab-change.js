@@ -14,11 +14,12 @@ function GotTab(tabInfo) {
 
 function CheckCache(tabURL)
 {
-    if(!Cache.Has(tabURL))    
-        AutoLoadIfAllowed(tabURL)
-    else{
+    if(Cache.Has(tabURL)){
         let amountOfPosts = Cache.Get(tabURL).data.length;
         Badge.Set({text:amountOfPosts});
+    }      
+    else{
+        AutoLoadIfAllowed(tabURL);
     }
 }
 

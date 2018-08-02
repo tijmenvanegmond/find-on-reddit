@@ -6,7 +6,7 @@ function RetrieveDataAboutUrl(url, promise)
     var searchTerms = DeconstructURLForSearchTerms(url);
     let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=10&sort=top`;
     console.log("retrieving data from: "+redditSearchURL);
-    var sendThrough = {originalUrl: url.toString()};
+    var sendThrough = {originalUrl: url.toString() , promise:promise};
     HttpGetAsync(redditSearchURL, SaveData, sendThrough);
 }
 
@@ -56,8 +56,8 @@ function SaveData(response, sendThrough)
         url: sendThrough.originalUrl,
         timeStamp: Date.now(),
         data: posts
-    }
-
+    }   
     Cache.Set(newData);
+    sendThrough.promise(newData);
     Badge.Set({text:newData.data.length});
 }
