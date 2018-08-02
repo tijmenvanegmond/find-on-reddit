@@ -1,5 +1,7 @@
 //ask for data
-AskForData();
+window.onload = function() {
+    AskForData();
+}
 
 function AskForData()
 {
@@ -8,38 +10,35 @@ function AskForData()
 
 //receive data
 chrome.runtime.onMessage.addListener(function (answer) {
-    if(answer.data !== undefined)
+    if (answer.cmd === "sendData") {
         RenderResults(answer.data);
+    }
 });
 
 function RenderResults(response) {
     var json = JSON.parse(response);
     var content = document.getElementById("popup-content");
     content.innerHTML = "";
-    if(json.data.dist < 1){
+    if(json.data.length < 1){
         content.innerHTML = "No posts.";
         return;
     }
-    json.data.children.forEach(AddPost);
+    json.data.forEach(AddPost);
 }
 
 function AddPost(post) {
-    var permalink = "https://www.reddit.com" + post.data.permalink;
-    var subRedditLink = "https://www.reddit.com/" + post.data.subreddit_name_prefixed;
-    var authorLink = "https://www.reddit.com/u/" + post.data.author;
     var link = document.createElement("tr");
     link.setAttribute("class", "post");
 
     var scoreEl = document.createElement("td");
     scoreEl.setAttribute("class", "score");
-    scoreEl.s
-    scoreEl.innerHTML = String(post.data.score);
+    scoreEl.innerHTML = String(post.score);
 
     var infoEl = document.createElement("td");
     infoEl.setAttribute("class", "info");
-    infoEl.innerHTML+=`<a class="link title" href="${permalink}">${post.data.title}</a>`;
-    infoEl.innerHTML+=`<div><a class="link subreddit" href="${subRedditLink}">${post.data.subreddit_name_prefixed}</a> • posted by <a class="link" href="${authorLink}">u/${post.data.author}</a> ${ToNiceTime(post.data.created_utc)}</div>`;
-    infoEl.innerHTML+=`<a href="${permalink}">${post.data.num_comments} comments</a>`;
+    infoEl.innerHTML+=`<a class="link title" href="${post.permalink}">${post.title}</a>`;
+    infoEl.innerHTML+=`<div><a class="link subreddit" href="${post.subreddit_link}">${post.subreddit_name}</a> • posted by <a class="link" href="${post.author_link}">u/${post.author_name}</a> ${ToNiceTime(post.timestamp)}</div>`;
+    infoEl.innerHTML+=`<a href="${post.permalink}">${post.num_comments} comments</a>`;
 
     link.appendChild(scoreEl);
     link.appendChild(infoEl);
