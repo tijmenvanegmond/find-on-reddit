@@ -6,22 +6,10 @@
 	</head>
 	<body>
 		<form>
-			<label><input type="checkbox" id="autoloadON" checked/>Allow Autoload</label>
+			<label><input type="checkbox" id="autoload" checked/>Allow Autoload</label>
 			<label>Autoload whitelist:</label>
-			<textarea id="whitelist" placeholder="Enter domains separated by commas."/></textarea>			
-			<label>When to autoload posts from reddit:</label>
-			<label>
-				<input type="radio" name="autoload" value="never" checked/>
-				Never
-			</label>
-  			<label>
-  				<input type="radio" name="autoload" value="onlyYouTube"/>
-  				Only on Youtube
-  			</label>
-  			<label>
-  				<input type="radio" name="autoload" value="always"/>
-  				Always
-  			</label>
+			<textarea id="whitelist" placeholder="Enter domains separated by spaces."/></textarea>			
+			<button type="submit">Save</button>
 		</form>
 		<script src="options.js"></script>
 	</body>

@@ -25,9 +25,16 @@ function CheckCache(tabURL)
 
 function AutoLoadIfAllowed(tabURL)
 {
-    //TODO:whitelist implementation
-    if(SettingsData.AutoloadON)
+    if(SettingsData.autoloadON || DomainInWhitelist(tabURL))
         RetrieveDataAboutUrl(tabURL);
-    else
-        console.log("not allowed to autoload")
+    else{
+        console.log("FIND-ON-REDDIT: not allowed to autoload");
+    }
+}
+
+function DomainInWhitelist(tabURL)
+{
+    var domain = tabURL.host;
+    console.log("domain:"+domain);
+    return SettingsData.whitelist.includes(domain);
 }

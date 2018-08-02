@@ -17,8 +17,8 @@
   ],
 
   "background": {
-    "scripts": ["scripts/manage-settings-data.js",
-                "scripts/manage-tab-change.js",
+    "scripts": ["scripts/manage-options.js",
+                "scripts/manage-autoload.js",
                 "scripts/manage-cache.js",
                 "scripts/retrieve-data.js",
                 "scripts/manage-badge.js",

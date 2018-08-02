@@ -1,36 +1,31 @@
-function clickAutoloadRadio() {
+function saveOptions(e)
+{
+    if(e){ e.preventDefault(); }
+
+    var autoload = document.getElementById('autoload').checked;    
+    var whitelist = document.getElementById('whitelist').value;
+
     chrome.storage.local.set({
-        autoload: getAutoloadValue()
+        autoloadON: autoload,
+        whitelist : whitelist
     });
+
+    chrome.runtime.sendMessage({cmd:"updateSettings"});
 }
 
-function getAutoloadValue() {
-    var radios = document.getElementsByName('autoload');
-    for (var i = 0, length = radios.length; i < length; i++) {
-        if (radios[i].checked)
-            return radios[i].value;
-    }
-}
-
-function setAutoloadValue(result) {
-    let value = result.autoload || "always";
-    var radios = document.getElementsByName('autoload');
-    for (var i = 0, length = radios.length; i < length; i++) {
-        radios[i].checked = radios[i].value === value;
-    }
-    //add save trigger functions to radiobuttons
-    for(var i = 0; i < radios.length; i++) {
-        radios[i].onclick = clickAutoloadRadio
-    }
-}
+function onGotOptions(item) {
+    document.getElementById('autoload').checked = item.autoload;
+    document.getElementById('whitelist').value = item.whitelist;
+} 
 
 function onError(error) {
     console.log(`Error: ${error}`);
 }
 
 function restoreOptions() {
-    var getting = browser.storage.local.get("autoload");
-    getting.then(setAutoloadValue, onError);
+    let gettingItem = browser.storage.local.get();
+    gettingItem.then(onGotOptions, onError);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);
+document.querySelector("form").addEventListener("submit", saveOptions);
