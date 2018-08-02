@@ -25,7 +25,7 @@ function CheckCache(tabURL)
 
 function AutoLoadIfAllowed(tabURL)
 {
-    if(SettingsData.autoloadON || DomainInWhitelist(tabURL))
+    if(SettingsData.autoload === true || DomainInWhitelist(tabURL))
         RetrieveDataAboutUrl(tabURL);
     else{
         console.log("FIND-ON-REDDIT: not allowed to autoload");

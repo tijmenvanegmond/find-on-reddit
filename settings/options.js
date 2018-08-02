@@ -9,7 +9,7 @@ function saveOptions(e)
     loadlimit = Number.isNaN(loadlimit)? 15 : loadlimit;
     
     chrome.storage.local.set({
-        autoloadON: autoload,
+        autoload: autoload,
         whitelist : whitelist,
         loadlimit:loadlimit
     });
