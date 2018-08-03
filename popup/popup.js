@@ -6,10 +6,12 @@ window.onload = function () {
 }
 
 function AskForData(forceReload) {
+    //only display loader
     document.getElementById("navbar").className += " hidden";
     document.getElementById("loader").className = "loader";
     document.getElementById("popup-content").innerHTML = "";
     document.getElementById("searchlink").innerText = "";
+    document.getElementById("no-results").className = "hidden";
 
     chrome.runtime.sendMessage({ cmd: "gibData", force_reload: forceReload || false });
 }
@@ -28,13 +30,14 @@ function RenderResults(response) {
     document.getElementById("btn-submit").onclick = x => { OpenRedditSubmit(postData) };
     document.getElementById("btn-refresh").onclick = x => { AskForData(true) };
     document.getElementById("btn-options").onclick = OpenOptions;
-    document.getElementById("loader").className += " hidden";
-    document.getElementById("searchlink").innerText = postData.api_call_url;
 
-    var content = document.getElementById("popup-content");
-    content.innerHTML = "";
+    document.getElementById("popup-content").innerHTML = "";
+
+    document.getElementById("loader").className += " hidden";
+    document.getElementById("searchlink").innerText = postData.api_call_url;    
+
     if (postData.data.length < 1) {
-        content.innerHTML = "No posts.";
+        document.getElementById("no-results").className = "";
         return;
     }
 
