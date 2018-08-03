@@ -1,33 +1,29 @@
 const FALLBACK_LIMIT = 10;
-function saveOptions(e)
-{
-    if(e){ e.preventDefault(); }
+function saveOptions(e) {
+    if (e) { e.preventDefault(); }
 
-    var autoload = document.getElementById('autoload').checked;    
+    var autoload = document.getElementById('autoload').checked;
     var whitelist = document.getElementById('whitelist').value;
     var loadlimit = document.getElementById('loadlimit').value;
     loadlimit = Number(loadlimit);
-    loadlimit = Number.isNaN(loadlimit)? FALLBACK_LIMIT : loadlimit;
-    
+    loadlimit = Number.isNaN(loadlimit) ? FALLBACK_LIMIT : loadlimit;
+
     chrome.storage.local.set({
         autoload: autoload,
         whitelist: whitelist,
         loadlimit: loadlimit
-    },tellToUpdate);
-
-    
+    }, tellToUpdate);
 }
 
-function tellToUpdate()
-{
-    chrome.runtime.sendMessage({cmd:"updateSettings"});
+function tellToUpdate() {
+    chrome.runtime.sendMessage({ cmd: "updateSettings" });
 }
 
 function onGotOptions(item) {
     document.getElementById('autoload').checked = item.autoload;
     document.getElementById('whitelist').value = item.whitelist;
     document.getElementById('loadlimit').value = item.loadlimit;
-} 
+}
 
 function onError(error) {
     console.log(`Error: ${error}`);

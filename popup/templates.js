@@ -1,5 +1,5 @@
 const templates = {
-    row:`
+    row: `
     <div class="score">
         <span>{{score}}</span>
     </div>

@@ -10,7 +10,7 @@ function RetrieveDataAboutUrl(info, callback) {
     console.log("FIND-ON-REDDIT: retrieving data from: " + redditSearchURL);
 
     info.api_call_url = redditSearchURL,
-    info.callback = callback;
+        info.callback = callback;
     HttpGetAsync(redditSearchURL, SaveData, info);
 }
 
@@ -28,9 +28,9 @@ function DeconstructURLForSearchTerms(info) {
         case "www.reddit.com":
             let titleMinusSubreddit = info.title.split(" : ")[0];
             let titleArray = titleMinusSubreddit.split(" ");
-            let amountOfWordsToShortTo = Math.min(REDDIT_MAX_SEARCHWORDS,titleArray.length);
-            let shortTitle = titleArray.splice(0,amountOfWordsToShortTo).join(" ");
-            searchTerm = encodeURIComponent(shortTitle);            
+            let amountOfWordsToShortTo = Math.min(REDDIT_MAX_SEARCHWORDS, titleArray.length);
+            let shortTitle = titleArray.splice(0, amountOfWordsToShortTo).join(" ");
+            searchTerm = encodeURIComponent(shortTitle);
             break;
     }
     return searchTerm;

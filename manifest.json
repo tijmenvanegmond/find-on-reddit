@@ -3,34 +3,33 @@
   "name": "Find On Reddit",
   "version": "0.5.5",
   "description": "Generates a pop-up with a list of Reddit posts with the current url. Note: That does mean it sends the url of every website you visit to Reddit. But you can change that behaviour in the settings.",
-  "homepage_url":  "https://github.com/uDomkop/find-on-reddit",
+  "homepage_url": "https://github.com/uDomkop/find-on-reddit",
   "icons": {
     "48": "icons/svg.svg"
   },
-
   "permissions": [
     "tabs",
     "https://api.reddit.com/*",
     "https://www.reddit.com/*/",
     "storage"
   ],
-
   "background": {
-    "scripts": ["scripts/time.js",
-                "scripts/cache.js",
-                "scripts/manage-options.js",
-                "scripts/autoload.js",
-                "scripts/retrieve-data.js",
-                "scripts/badge.js",
-                "scripts/manage-data-requests.js"]
+    "scripts": [
+      "scripts/time.js",
+      "scripts/cache.js",
+      "scripts/manage-options.js",
+      "scripts/autoload.js",
+      "scripts/retrieve-data.js",
+      "scripts/badge.js",
+      "scripts/manage-data-requests.js"
+    ]
   },
-
   "browser_action": {
     "default_icon": "icons/svg.svg",
     "default_title": "Find On Reddit",
     "default_popup": "popup/index.html"
   },
-   "options_ui": {
+  "options_ui": {
     "page": "settings/index.html"
   }
 }
