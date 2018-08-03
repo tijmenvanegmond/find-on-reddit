@@ -1,7 +1,7 @@
 const REDDIT_URL = "https://www.reddit.com";
 const REDDIT_URL_FORWARD = "https://www.reddit.com/";
 
-function RetrieveDataAboutUrl(url, promise)
+function RetrieveDataAboutUrl(url, callback)
 {    
     var searchTerms = DeconstructURLForSearchTerms(url);
     let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=${SettingsData.loadlimit}`;
@@ -9,7 +9,7 @@ function RetrieveDataAboutUrl(url, promise)
     var sendThrough = {
         original_url: url.toString(),
         api_call_url: redditSearchURL,
-        promise:promise       
+        callback:callback       
     };
     HttpGetAsync(redditSearchURL, SaveData, sendThrough);
 }
@@ -73,7 +73,7 @@ function SaveData(response, sendThrough) {
         data: posts
     }   
     Cache.Set(newData);
-    if(sendThrough.promise) 
-        sendThrough.promise(newData);
+    if(sendThrough.callback)
+        sendThrough.callback(newData);
     Badge.Set({text:newData.data.length});
 }

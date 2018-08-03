@@ -3,8 +3,13 @@ window.onload = function () {
     AskForData();
 }
 
-function AskForData() {
-    chrome.runtime.sendMessage({ cmd: "gibData" });
+function AskForData(forceReload) {    
+    document.getElementById("navbar").className += " hidden";    
+    document.getElementById("loader").className = "loader";
+    document.getElementById("popup-content").innerHTML = "";
+    document.getElementById("searchlink").innerText ="";
+
+    chrome.runtime.sendMessage({ cmd: "gibData", force_reload: forceReload || false});    
 }
 
 //receive data
@@ -16,8 +21,13 @@ chrome.runtime.onMessage.addListener(function (answer) {
 
 function RenderResults(response) {
     var json = JSON.parse(response);
-    var navbar = document.getElementById("navbar");
-    navbar.innerText = json.api_call_url;
+   
+    document.getElementById("navbar").className = "navbar";
+    document.getElementById("loader").className += " hidden";
+    document.getElementById("searchlink").innerText = json.api_call_url;
+    document.getElementById("btn-refresh").onclick = x => {AskForData(true)};
+    document.getElementById("btn-options").onclick = chrome.runtime.openOptionsPage;
+
     var content = document.getElementById("popup-content");
     content.innerHTML = "";
     if (json.data.length < 1) {
@@ -25,6 +35,10 @@ function RenderResults(response) {
         return;
     }
     json.data.forEach(AddPost);
+}
+
+function OpenOptions(){
+    chrome.runtime.openOptionsPage();
 }
 
 function AddPost(post) {

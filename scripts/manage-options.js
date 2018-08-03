@@ -6,7 +6,6 @@ const DEFAULT_OPTIONS ={
 var SettingsData = {}
 
 UpdateSettings();
-
 //receive when to update options
 chrome.runtime.onMessage.addListener(function (answer) {
     if (answer.cmd === "updateSettings") {

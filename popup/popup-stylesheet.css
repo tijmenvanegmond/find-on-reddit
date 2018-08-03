@@ -18,11 +18,29 @@ a:hover{
     text-decoration: underline;
 }
 
-.hidden{
-    display: none;
+#navbar{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .5rem;
+    color: rgb(100 ,100 ,100 );
+    font-size: .75rem;
 }
 
-#navbar{
+button {    
+    background-color:  rgb(50, 50, 50);
+    color: #efefef;
+    border:none;
+    padding: .3rem;
+    font-size: .9rem;
+    text-align: center;
+    border-radius: .2rem;
+}
+
+button:hover{
+    background-color:  rgb(70, 70, 70) !important;
+}
+
+#searchlink{
     padding: .3rem .1rem 0 .1rem;
     color: rgb(100 ,100 ,100 );
     font-size: .75rem;
@@ -63,11 +81,6 @@ a:hover{
     border-radius: 0 .2rem .2rem 0;
 }
 
-/* .info:hover{
-    background-color: rgb(70, 70, 70) !important;
-    cursor: pointer;
- } */
-
 .info > *{
     margin-top: .1em;
     font-weight: 400;
@@ -84,7 +97,7 @@ a:hover{
     font-size: .9rem;
 }
 
-.loader {
+#loader {
     grid-column: 1 / 3;
     justify-self: center;
     border: 4px solid white;
@@ -98,6 +111,10 @@ a:hover{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.hidden{
+    display: none !important;
 }
 
 
