@@ -31,7 +31,8 @@ button {
     color: #efefef;
     border:none;
     padding: .3rem;
-    font-size: .9rem;
+    margin: 0 .3rem;
+    font-size: 1rem;
     text-align: center;
     border-radius: .2rem;
 }

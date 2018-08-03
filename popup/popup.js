@@ -1,3 +1,5 @@
+const REDDIT_SUBMIT_URL = "https://www.reddit.com/submit?";
+
 //ask for data
 window.onload = function () {
     AskForData();
@@ -20,21 +22,29 @@ chrome.runtime.onMessage.addListener(function (answer) {
 });
 
 function RenderResults(response) {
-    var json = JSON.parse(response);
+    var postData = JSON.parse(response);
    
     document.getElementById("navbar").className = "navbar";
-    document.getElementById("loader").className += " hidden";
-    document.getElementById("searchlink").innerText = json.api_call_url;
+    document.getElementById("btn-submit").onclick = x => {OpenRedditSubmit(postData)};
     document.getElementById("btn-refresh").onclick = x => {AskForData(true)};
     document.getElementById("btn-options").onclick = OpenOptions;
+    document.getElementById("loader").className += " hidden";
+    document.getElementById("searchlink").innerText = postData.api_call_url;
 
     var content = document.getElementById("popup-content");
     content.innerHTML = "";
-    if (json.data.length < 1) {
+    if (postData.data.length < 1) {
         content.innerHTML = "No posts.";
         return;
     }
-    json.data.forEach(AddPost);
+
+    postData.data.forEach(AddPost);
+}
+
+function OpenRedditSubmit(data){
+    
+    url = `${REDDIT_SUBMIT_URL}url=${encodeURIComponent(data.url)}&title=${data.title}`
+    window.open(url); 
 }
 
 function OpenOptions(){
