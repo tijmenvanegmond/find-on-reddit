@@ -16,7 +16,7 @@ function RetrieveDataAboutUrl(info, callback) {
 
 function DeconstructURLForSearchTerms(info) {
     let url = info.url;
-    var searchTerm = `url:${url.href}`;
+    var searchTerm = `url:${url.hostname+url.pathname}`;
     switch (url.hostname) {
         case "www.youtu.be":
         case "www.youtube.com":
