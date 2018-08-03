@@ -26,7 +26,7 @@ function RenderResults(response) {
     document.getElementById("loader").className += " hidden";
     document.getElementById("searchlink").innerText = json.api_call_url;
     document.getElementById("btn-refresh").onclick = x => {AskForData(true)};
-    document.getElementById("btn-options").onclick = chrome.runtime.openOptionsPage;
+    document.getElementById("btn-options").onclick = OpenOptions;
 
     var content = document.getElementById("popup-content");
     content.innerHTML = "";
