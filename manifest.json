@@ -21,11 +21,11 @@
     "scripts": [
       "scripts/time.js",
       "scripts/cache.js",
-      "scripts/manage-options.js",
+      "scripts/manage-settings.js",
       "scripts/autoload.js",
       "scripts/retrieve-data.js",
       "scripts/badge.js",
-      "scripts/manage-data-requests.js"
+      "scripts/manage-popup-requests.js"
     ]
   },
   "browser_action": {

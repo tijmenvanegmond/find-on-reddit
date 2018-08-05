@@ -1,3 +1,6 @@
+/*
+    this script listens to tab and url changes then it updates the badge and if it is allowed/necessary it wil retrieve call RetrieveDataAboutUrl in retrieve-data.js
+*/
 chrome.tabs.onUpdated.addListener(OnTabChange);
 chrome.tabs.onActivated.addListener(OnTabChange);
 

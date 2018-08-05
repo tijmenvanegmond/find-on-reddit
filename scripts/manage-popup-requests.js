@@ -1,3 +1,6 @@
+/*
+    This script will respond to a datarequest message most times send when opening/reloading the popup.
+*/
 chrome.runtime.onMessage.addListener(function (request) {
     if (request.cmd === "gibData") {
         let forceReload = request.force_reload || false;

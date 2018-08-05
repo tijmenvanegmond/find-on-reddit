@@ -1,3 +1,6 @@
+/*
+    This script takes a tabinfo (url) and and tries to get the best result about it from reddit's api.
+*/
 const REDDIT_URL = "https://www.reddit.com";
 const REDDIT_URL_FORWARD = "https://www.reddit.com/";
 const REDDIT_MAX_SEARCHWORDS = 8;
@@ -5,6 +8,9 @@ const DOMAIN_USE_PARAMETERS = [
     { domain: "youtube.com", parameter_name: "v"},
     { domain: "google.com", parameter_name: "q"}
 ]
+
+
+//Info should be a slightly modified tabInfo. where the url property is a URL obj (not a string)
 function RetrieveDataAboutUrl(info, callback) {
     if (info.url === undefined)
         throw ("FIND-ON-REDDIT: info object must have a url property");
@@ -16,6 +22,7 @@ function RetrieveDataAboutUrl(info, callback) {
     HttpGetAsync(redditSearchURL, SaveData, info);
 }
 
+//returns a string that should yield the best results when used as a reddit querry
 function DeconstructURLForSearchTerms(info) {
     let url = info.url;
     var searchTerm = `url:"${url.hostname+url.pathname}"`;
@@ -42,6 +49,7 @@ function DeconstructURLForSearchTerms(info) {
     return searchTerm;
 }
 
+//tries to get domain specific searchparamters from settings
 function GetDomainData(domain)
 {
     domain = domain.replace("www.","");
@@ -61,6 +69,7 @@ function HttpGetAsync(url, callback, sendThroughInfo) {
 function SaveData(response, info) {
     var json = JSON.parse(response);
     var posts = []
+    //A slight post data reformatting and only taking used properties
     json.data.children.forEach(post => {
         posts.push(
             {
@@ -85,8 +94,11 @@ function SaveData(response, info) {
         timeStamp: Date.now(),
         data: posts
     }
+
     Cache.Set(newData);
+
     if (info.callback)
         info.callback(newData);
+    
     Badge.Set({ text: newData.data.length });
 }
