@@ -1,29 +1,35 @@
 const REDDIT_URL = "https://www.reddit.com";
 const REDDIT_URL_FORWARD = "https://www.reddit.com/";
 const REDDIT_MAX_SEARCHWORDS = 8;
-
+const DOMAIN_USE_PARAMETERS = [
+    { domain: "youtube.com", parameter_name: "v"},
+    { domain: "google.com", parameter_name: "q"}
+]
 function RetrieveDataAboutUrl(info, callback) {
     if (info.url === undefined)
-        throw ("info object must have a url property");
+        throw ("FIND-ON-REDDIT: info object must have a url property");
     var searchTerms = DeconstructURLForSearchTerms(info);
-    let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=${SettingsData.loadlimit}`;
+    let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=${SettingsData.loadlimit}`;    
     console.log("FIND-ON-REDDIT: retrieving data from: " + redditSearchURL);
-
-    info.api_call_url = redditSearchURL,
-        info.callback = callback;
+    info.api_call_url = redditSearchURL;
+    info.callback = callback;
     HttpGetAsync(redditSearchURL, SaveData, info);
 }
 
 function DeconstructURLForSearchTerms(info) {
     let url = info.url;
-    var searchTerm = `url:${url.hostname+url.pathname}`;
+    var searchTerm = `url:"${url.hostname+url.pathname}"`;
+
+    let domainData = GetDomainData(url.host);
+    if(domainData)
+    {
+        let paramValue = url.searchParams.get(domainData.parameter_name);
+        if (paramValue != undefined)
+            searchTerm = `url:"${paramValue}"`;
+    }
+
     switch (url.hostname) {
-        case "www.youtu.be":
-        case "www.youtube.com":
-            var videoID = url.searchParams.get("v");
-            if (videoID !== undefined)
-                searchTerm = `url:${videoID}`;
-            break;
+        case "reddit.com":
         case "old.reddit.com":
         case "www.reddit.com":
             let titleMinusSubreddit = info.title.split(" : ")[0];
@@ -34,6 +40,12 @@ function DeconstructURLForSearchTerms(info) {
             break;
     }
     return searchTerm;
+}
+
+function GetDomainData(domain)
+{
+    domain = domain.replace("www.","");
+    return DOMAIN_USE_PARAMETERS.find(obj => obj.domain === domain);
 }
 
 function HttpGetAsync(url, callback, sendThroughInfo) {

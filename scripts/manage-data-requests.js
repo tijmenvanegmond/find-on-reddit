@@ -7,6 +7,7 @@ chrome.runtime.onMessage.addListener(function (request) {
 });
 
 function ManageRequestsGotTab(tabData, forceReload) {
+    //reformat tabdata
     tabData = tabData[0];
     tabData.url = new URL(tabData.url);
 
