@@ -14,8 +14,7 @@ chrome.runtime.onMessage.addListener(function (answer) {
 });
 
 function UpdateSettings() {
-    var getting = browser.storage.local.get();
-    getting.then(SetSettings);
+    chrome.storage.local.get(null, SetSettings); //retrieve data
     Cache.Empty();
     console.log("FIND-ON-REDDIT: updated settings");
 }
@@ -27,21 +26,17 @@ function SetSettings(data) {
 
 function SetDefaults(data) {
     let hasSetDefault = false;
-
     if (data === undefined) {
         hasSetDefault = true;
         data = DEFAULT_OPTIONS;
     }
-
     for (let propName in DEFAULT_OPTIONS) {
         if (data[propName] === undefined) {
             hasSetDefault = true;
             data[propName] = DEFAULT_OPTIONS[propName];
         }
     }
-
-    if (hasSetDefault) {
-        chrome.storage.local.set(data);
-    }
+    if (hasSetDefault)
+        chrome.storage.local.set(data); //save defaults    
     return data;
 }

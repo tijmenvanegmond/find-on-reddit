@@ -1,18 +1,18 @@
 const FALLBACK_LIMIT = 10;
+
 function saveOptions(e) {
     if (e) { e.preventDefault(); }
-
     var autoload = document.getElementById('autoload').checked;
     var whitelist = document.getElementById('whitelist').value;
     var loadlimit = document.getElementById('loadlimit').value;
     loadlimit = Number(loadlimit);
     loadlimit = Number.isNaN(loadlimit) ? FALLBACK_LIMIT : loadlimit;
-
-    chrome.storage.local.set({
-        autoload: autoload,
-        whitelist: whitelist,
-        loadlimit: loadlimit
-    }, tellToUpdate);
+    let optionsData = {
+            autoload: autoload,
+            whitelist: whitelist,
+            loadlimit: loadlimit       
+    };
+    chrome.storage.local.set(optionsData, tellToUpdate);
 }
 
 function tellToUpdate() {
@@ -25,13 +25,8 @@ function onGotOptions(item) {
     document.getElementById('loadlimit').value = item.loadlimit;
 }
 
-function onError(error) {
-    console.log(`Error: ${error}`);
-}
-
 function restoreOptions() {
-    let gettingItem = browser.storage.local.get();
-    gettingItem.then(onGotOptions, onError);
+    chrome.storage.local.get(null,onGotOptions );
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

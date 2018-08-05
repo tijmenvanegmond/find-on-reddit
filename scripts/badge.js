@@ -3,7 +3,7 @@ var Badge = {
 
     Reset: function () {
         chrome.browserAction.setBadgeText(
-            { text: null }
+            { text: "" }
         );
     },
 

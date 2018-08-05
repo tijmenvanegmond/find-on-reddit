@@ -11,28 +11,32 @@
 </head>
 
 <body>
-    <div id="navbar" class="hidden">
-        <button id="btn-submit" title="Share on reddit">
-            <i class="fas fa-share"></i>
-        </button>
-        <button id="btn-refresh" title="Refresh posts">
-            <i class="fas fa-sync-alt"></i>
-        </button>
-        <button id="btn-options" title="Open options page">
-            <i class="fas fa-sliders-h"></i>
-        </button>
-    </div>
     <div id="loader"></div>
-    <div id="popup-content">
-        <!-- posts here  -->
+    <div id="content" class="hidden">
+        <div id="navbar">
+            <button id="btn-submit" title="Share on reddit">
+                <i class="fas fa-share"></i>
+            </button>
+            <button id="btn-refresh" title="Refresh posts">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+            <button id="btn-options" title="Open options page">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+        </div>
+
+        <div id="popup-content">
+            <!-- posts here  -->
+        </div>
+        <span id="no-results">
+            Could't find anything.
+            <i class="fas fa-sad-tear"></i>
+        </span>
+        <a href="" class id="searchlink"></a>
     </div>
-    <span id="no-results" class="hidden">
-        Could't find anything.
-        <i class="fas fa-sad-tear"></i>
-    </span>
-    <div id="searchlink"></div>
 </body>
-<script src="popup.js"></script>
 <script src="templates.js"></script>
+<script src="popup.js"></script>
+<script src="chrome-link-fix.js"></script>
 
 </html>
