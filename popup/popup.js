@@ -1,4 +1,5 @@
 const REDDIT_SUBMIT_URL = "https://www.reddit.com/submit?";
+const MAX_STRING_LENGTH = 80;
 
 //ask for data
 window.onload = function () {
@@ -44,7 +45,6 @@ function RenderResults(response) {
 }
 
 function OpenRedditSubmit(data) {
-
     url = `${REDDIT_SUBMIT_URL}url=${encodeURIComponent(data.url)}&title=${data.title}`
     window.open(url);
 }
@@ -53,13 +53,20 @@ function OpenOptions() {
     chrome.runtime.openOptionsPage();
 }
 
-function AddPost(post) {
+function StringEllipsize(aString)
+{
+    if(aString.length >= MAX_STRING_LENGTH + 3)
+        return aString.substring(0, MAX_STRING_LENGTH).trim() + "...";
+    return aString;
+}
 
+function AddPost(post) {
+    post.title_ellipsized = StringEllipsize(post.title);
     let newPost = templates.row;
     for (var prop in post) {
         let reg = new RegExp(`{{${prop}}}`, "gi");
         newPost = newPost.replace(reg, post[prop]);
     }
     var body = document.getElementById("popup-content");
-    body.innerHTML += newPost;
+    body.innerHTML += newPost; //TODO: firefox wants this sanitized
 }
