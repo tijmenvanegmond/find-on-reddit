@@ -1,13 +1,13 @@
 const DEFAULT_BADGE_COLOUR = "green";
 var Badge = {
 
-    Reset: function () {
+    Reset () {
         chrome.browserAction.setBadgeText(
             { text: "" }
         );
     },
 
-    Set: function (options) {
+    Set (options) {
         chrome.browserAction.setBadgeText(
             { text: String(options.text) }
         );

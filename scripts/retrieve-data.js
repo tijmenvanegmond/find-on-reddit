@@ -4,11 +4,6 @@
 const REDDIT_URL = "https://www.reddit.com";
 const REDDIT_URL_FORWARD = "https://www.reddit.com/";
 const REDDIT_MAX_SEARCHWORDS = 8;
-const DOMAIN_USE_PARAMETERS = [
-    { domain: "youtube.com", parameter_name: "v"},
-    { domain: "google.com", parameter_name: "q"}
-]
-
 
 //Info should be a slightly modified tabInfo. where the url property is a URL obj (not a string)
 function RetrieveDataAboutUrl(info, callback) {
@@ -26,7 +21,6 @@ function RetrieveDataAboutUrl(info, callback) {
 function DeconstructURLForSearchTerms(info) {
     let url = info.url;
     var searchTerm = `url:"${url.hostname+url.pathname}"`;
-
     let domainData = GetDomainData(url.host);
     if(domainData)
     {
@@ -34,7 +28,6 @@ function DeconstructURLForSearchTerms(info) {
         if (paramValue != undefined)
             searchTerm = `url:"${paramValue}"`;
     }
-
     switch (url.hostname) {
         case "reddit.com":
         case "old.reddit.com":
@@ -53,7 +46,7 @@ function DeconstructURLForSearchTerms(info) {
 function GetDomainData(domain)
 {
     domain = domain.replace("www.","");
-    return DOMAIN_USE_PARAMETERS.find(obj => obj.domain === domain);
+    return SettingsData.domain_parameters.find(obj => obj.domain === domain);
 }
 
 function HttpGetAsync(url, callback, sendThroughInfo) {

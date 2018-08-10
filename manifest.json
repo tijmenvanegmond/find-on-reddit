@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Find On Reddit",
   "version": "0.6",
-  "description": "Generates a pop-up with a list of Reddit posts with the current url. Note: That does mean it sends the url of every website you visit to Reddit. But you can change that behaviour in the settings.",
+  "description": "Generates a pop-up with a list of Reddit posts with the current url.",
   "homepage_url": "https://github.com/uDomkop/find-on-reddit",
   "icons": {
     "16": "icons/16.png",

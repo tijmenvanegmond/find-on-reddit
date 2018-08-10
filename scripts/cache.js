@@ -1,6 +1,6 @@
 var Cache = {
     data: [],
-    Set: function (data) {
+    Set (data) {
         for (let i = 0; i < this.data.length; i++) {
             if (this.data[i].url == data.url) {
                 this.data[i] = data;
@@ -10,7 +10,7 @@ var Cache = {
         this.data.push(data);
     },
 
-    Has: function (url) {
+    Has (url) {
         url = url.toString();
         for (let i = 0; i < this.data.length; i++) {
             if (this.data[i].url == url)
@@ -19,7 +19,7 @@ var Cache = {
         return false;
     },
 
-    Get: function (url) {
+    Get (url) {
         url = url.toString();
         for (let i = 0; i < this.data.length; i++) {
             if (this.data[i].url == url)
@@ -28,7 +28,7 @@ var Cache = {
         return undefined;
     },
 
-    Empty: function () {
+    Empty () {
         this.data = [];
     }
 
