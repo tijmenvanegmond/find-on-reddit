@@ -1,4 +1,8 @@
-html, body {
+html {
+    /* light theme applied in options js*/
+    background-color: #ffffff;
+    color: #505050;
+    /* dark theme */
     background-color: rgb(50, 50, 50);
     color: #efefef;
     font-family:  BentonSans, sans-serif;
@@ -22,14 +26,13 @@ span{
     display: flex;
     justify-content: flex-end;
     margin-bottom: .5rem;
-    color: rgb(100 ,100 ,100 );
     font-size: .75rem;
 }
 
 button {    
-    background-color:  rgb(50, 50, 50);
-    color: #efefef;
-    border:none;
+    background-color: transparent;
+    color: inherit;
+    border: none;
     padding: .3rem;
     margin: 0 .3rem;
     font-size: 1rem;
@@ -38,7 +41,7 @@ button {
 }
 
 button:hover{
-    background-color:  rgb(70, 70, 70) !important;
+    background-color: rgba(0, 0, 0,.33); /*make it darker*/
 }
 
 #popup-content{
@@ -49,7 +52,7 @@ button:hover{
 }
 
 #popup-content > *{
-   background-color: rgb(45, 45, 45);
+   background-color: rgba(0, 0, 0,.1); /*make it darker*/
 }
 
 #no-results{
@@ -103,31 +106,32 @@ button:hover{
 
 .info {
     grid-column: 2 / 3;
-    display: flex;
-    flex-direction: column;
     padding: .5rem;
     border-radius: 0 .2rem .2rem 0;
 }
 
 .info > *{
-    color: #bbbbbb !important;
-    margin-top: .2em;
+    opacity: 0.8;
+    line-height: 1.2rem;
     font-weight: 400;
     font-size: .8rem;
 }
 
 .info > .title{
     color: inherit !important;
+    opacity: 1;
     font-weight: 600;
     font-size: 1rem;
     white-space: nowrap;
 }
 
 .subreddit{
-    color: #efefef;
+    color: inherit !important;
+    opacity: 1;
     font-weight: 600;
     font-size: .9rem;
 }
+
 
 .hidden{
     display: none !important;

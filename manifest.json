@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Find On Reddit",
-  "version": "0.6",
+  "version": "0.7",
   "description": "Generates a pop-up with a list of Reddit posts with the current url.",
   "homepage_url": "https://github.com/uDomkop/find-on-reddit",
   "icons": {

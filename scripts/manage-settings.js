@@ -7,14 +7,15 @@ const DEFAULT_DOMAIN_PARAMETERS = [
     { domain: "google.com", parameter_name: "q"}
 ]
 const DEFAULT_SETTINGS = {
+    use_dark_theme: true,
     autoload: true,
     whitelist: "youtube.com youtu.be reddit.com old.reddit.com",
     loadlimit: 15,
     domain_parameters: DEFAULT_DOMAIN_PARAMETERS
 };
 var SettingsData = {}
-
 UpdateSettings();
+
 //receive when to update settings
 chrome.runtime.onMessage.addListener(function (answer) {
     if (answer.cmd === "updateSettings") {
@@ -23,8 +24,8 @@ chrome.runtime.onMessage.addListener(function (answer) {
 });
 
 function UpdateSettings() {
-    chrome.storage.local.get(null, SetSettings); //retrieve data
     Cache.Empty();
+    chrome.storage.local.get(null, SetSettings); //retrieve data    
     console.log("FIND-ON-REDDIT: updated settings");
 }
 
@@ -33,6 +34,7 @@ function SetSettings(data) {
     SettingsData = data;
 }
 
+//make sure all settings have a value
 function SetDefaults(data) {
     let hasSetDefault = false;
     if (data === undefined) {

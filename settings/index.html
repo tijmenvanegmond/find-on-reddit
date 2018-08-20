@@ -8,12 +8,17 @@
 
 <body>
 	<form>
-		<label>Allow Autoload</label>
+		<label>Use Dark Theme</label>
+		<label class="container form-input">
+			<input id="useDarkTheme" type="checkbox" checked/>
+			<span class="checkmark"></span>
+		</label>
+		<label>Enable Autoload</label>
 		<label class="container form-input">
 			<input id="autoload" type="checkbox" checked/>
 			<span class="checkmark"></span>
 		</label>
-		<label>Autoload whitelist</label>
+		<label>Always Autoload whitelist</label>
 		<textarea id="whitelist" class="form-input" placeholder="Enter domains separated by spaces." /></textarea>
 		<label>Define max posts to load</label>
 		<input id="loadlimit" class="form-input" type="number" />

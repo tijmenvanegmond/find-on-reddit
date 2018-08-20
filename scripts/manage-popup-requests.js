@@ -7,6 +7,9 @@ chrome.runtime.onMessage.addListener(function (request) {
         var query = { active: true, currentWindow: true };
         chrome.tabs.query(query, result => ManageRequestsGotTab(result, forceReload));
     }
+    else if (request.cmd === "gibSettings") {
+        chrome.runtime.sendMessage({ cmd: "sendSettings", data: SettingsData });
+    }
 });
 
 function ManageRequestsGotTab(tabData, forceReload) {

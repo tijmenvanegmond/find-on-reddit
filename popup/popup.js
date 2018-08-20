@@ -1,9 +1,10 @@
 const REDDIT_SUBMIT_URL = "https://www.reddit.com/submit?";
-const MAX_STRING_LENGTH = 80;
+const MAX_STRING_LENGTH = 75;
 
 //ask for data
-window.onload = function () {
-    AskForData();    
+window.onload = function () {    
+    chrome.runtime.sendMessage({ cmd: "gibSettings"});
+    AskForData();
 }
 
 function AskForData(forceReload) {
@@ -17,10 +18,23 @@ function AskForData(forceReload) {
 
 //receive data
 chrome.runtime.onMessage.addListener(function (answer) {
-    if (answer.cmd === "sendData") {
-        RenderResults(answer.data);
+    if(answer.cmd === "sendSettings"){
+        UpdateCSS(answer.data);
     }
+    else if (answer.cmd === "sendData") {
+        RenderResults(answer.data);
+    } 
 });
+
+function UpdateCSS(settings)
+{   //set light theme colors
+    if(settings.use_dark_theme === false){
+        document.documentElement.style.color = "#505050";
+        document.documentElement.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#505050";
+        document.body.style.backgroundColor = "#ffffff";
+    }
+}
 
 function RenderResults(response) {
     var data = JSON.parse(response);

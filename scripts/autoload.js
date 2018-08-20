@@ -27,14 +27,14 @@ function CheckCache(tabInfo) {
 }
 
 function AutoLoadIfAllowed(tabInfo) {
-    if (SettingsData.autoload === true || DomainInWhitelist(tabInfo.url))
+    if (SettingsData.autoload === true || IsDomainInWhitelist(tabInfo.url))
         RetrieveDataAboutUrl(tabInfo);
     else {
         console.log("FIND-ON-REDDIT: not allowed to autoload");
     }
 }
 
-function DomainInWhitelist(tabURL) {
+function IsDomainInWhitelist(tabURL) {
     var domain = tabURL.host.replace('www.', '');
     if (domain) //only if theres a domain
         return SettingsData.whitelist.includes(domain);

@@ -10,7 +10,7 @@ function RetrieveDataAboutUrl(info, callback) {
     if (info.url === undefined)
         throw ("FIND-ON-REDDIT: info object must have a url property");
     var searchTerms = DeconstructURLForSearchTerms(info);
-    let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=${SettingsData.loadlimit}`;    
+    let redditSearchURL = `https://api.reddit.com/search?q=${searchTerms}&limit=${SettingsData.loadlimit}&sort=top`;
     console.log("FIND-ON-REDDIT: retrieving data from: " + redditSearchURL);
     info.api_call_url = redditSearchURL;
     info.callback = callback;
@@ -32,12 +32,14 @@ function DeconstructURLForSearchTerms(info) {
         case "reddit.com":
         case "old.reddit.com":
         case "www.reddit.com":
-            let titleMinusSubreddit = info.title.split(" : ")[0];
-            let titleArray = titleMinusSubreddit.split(" ");
-            let amountOfWordsToShortTo = Math.min(REDDIT_MAX_SEARCHWORDS, titleArray.length);
-            let shortTitle = titleArray.splice(0, amountOfWordsToShortTo).join(" ");
-            searchTerm = encodeURIComponent(shortTitle);
-            break;
+            if(url.pathname && url.pathname != "\/"){
+                let titleMinusSubreddit = info.title.split(" : ")[0];
+                let titleArray = titleMinusSubreddit.split(" ");
+                let amountOfWordsToShortTo = Math.min(REDDIT_MAX_SEARCHWORDS, titleArray.length);
+                let shortTitle = titleArray.splice(0, amountOfWordsToShortTo).join(" ");
+                searchTerm = encodeURIComponent(shortTitle);
+            }
+        break;
     }
     return searchTerm;
 }
