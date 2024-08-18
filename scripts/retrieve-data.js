@@ -20,13 +20,13 @@ function RetrieveDataAboutUrl(info, callback) {
 //returns a string that should yield the best results when used as a reddit querry
 function DeconstructURLForSearchTerms(info) {
     let url = info.url;
-    var searchTerm = `url:"${url.hostname+url.pathname}"`;
+    var searchTerm = `url:"${url.hostname+url.pathname}" OR "${url.hostname+url.pathname}"`;
     let domainData = GetDomainData(url.host);
     if(domainData)
     {
         let paramValue = url.searchParams.get(domainData.parameter_name);
         if (paramValue != undefined)
-            searchTerm = `url:"${paramValue}"`;
+            searchTerm = `url:"${paramValue}" OR "${paramValue}"`;
     }
     switch (url.hostname) {
         case "reddit.com":
